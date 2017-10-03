@@ -17,8 +17,12 @@ import com.stackroute.activitystream.model.User;
 @Transactional
 public class UserDAOImpl implements UserDAO
 {
+//Remove loggers.  
+//Need to use AOP for logging
+//This comment is for all the DAOImpls whereever you used loggers.
 	private static Logger logger=LoggerFactory.getLogger(UserDAOImpl.class);
 	
+	//it should be private
 	@Autowired
 	SessionFactory sessionFactory;
 	
@@ -31,6 +35,7 @@ public class UserDAOImpl implements UserDAO
 	{
 		try
 		{
+		        //What is the status A?
 			user.setUserStatus("A");
 			sessionFactory.getCurrentSession().save(user);
 			logger.debug("Registration sucessfull in DAO");
@@ -68,6 +73,9 @@ public class UserDAOImpl implements UserDAO
 			Query query=sessionFactory.getCurrentSession().createQuery("from User where emailId=? and password=?");
 			query.setParameter(0,user.getEmailId());
 			query.setParameter(1, user.getPassword());
+			//whey newUser??
+			//directly you can write
+			//return (User)query.uniqueResult();
 			User newUser=(User) query.uniqueResult();
 			logger.debug("Login Sucessfull");
 			return newUser;
@@ -117,6 +125,7 @@ public class UserDAOImpl implements UserDAO
 	{
 		try
 		{
+		        //Do you want to get all the users OR only active users?
 			List<User> user=sessionFactory.getCurrentSession().createQuery("from User").list();
 			return user;
 		}
