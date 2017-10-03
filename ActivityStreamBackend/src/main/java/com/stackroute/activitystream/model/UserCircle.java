@@ -8,6 +8,7 @@ import javax.persistence.Id;
 
 import org.springframework.stereotype.Component;
 
+//Use proper hibernate annotaions for validations.
 @Component
 @Entity
 public class UserCircle 
