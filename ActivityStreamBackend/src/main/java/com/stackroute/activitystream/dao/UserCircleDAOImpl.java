@@ -72,6 +72,9 @@ public class UserCircleDAOImpl implements UserCircleDAO
 		
 	}
 	
+	
+	//What is the use of this method?
+	
 	@SuppressWarnings("rawtypes")
 	private UserCircle getUserCircle(int circleId,String emailId)
 	{
