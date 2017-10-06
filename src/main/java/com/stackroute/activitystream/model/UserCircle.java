@@ -15,6 +15,8 @@ public class UserCircle
 	@Id
 	private int userCircleId;
 	
+	
+	//Hibernate annotations for validations are commented
 	//@NotNull
 	private String emailId;
 	//@NotNull
