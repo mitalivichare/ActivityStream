@@ -52,13 +52,34 @@ public class MessageDAOImpl implements MessageDAO {
 	@Override
 	public List<Message> getMessagesByUser(String emailId) {
 		// TODO Auto-generated method stub
-		return null;
+		try {
+			List<Message> userMessages;
+			Query query = sessionFactory.getCurrentSession().createQuery("from Message where receiverUserId = ?");
+			query.setParameter(0, emailId);
+			userMessages = query.list();
+			return userMessages;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		//return null;
 	}
 
 	@Override
 	public List<Message> getMessagesByCircle(int circleId) {
 		// TODO Auto-generated method stub
-		return null;
+		try {
+			List<Message> circleMessages;
+			Query query = sessionFactory.getCurrentSession().createQuery("from Message where receiverCircleId = ?");
+			query.setParameter(0, circleId);
+			query.setMaxResults(10);
+			circleMessages = query.list();
+			return circleMessages;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		//return null;
 	}
 
 }

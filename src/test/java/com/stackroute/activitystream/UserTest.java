@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.stackroute.activitystream.dao.UserDAO;
@@ -34,22 +35,22 @@ public class UserTest {
 		/**
 		 * 
 		 */
-		@Test
+		@Test(expected=DataIntegrityViolationException.class)
 		public void createUserTest() {
-			user.setFirstName("Sayali");
+			user.setFirstName("Shivani");
 			user.setLastName("Vichare");
-			user.setEmailId("sayali@gmail.com");
-			user.setPassword("sayali");
-			user.setContactNumber("9076835678");
+			user.setEmailId("shivani@gmail.com");
+			user.setPassword("shivani");
+			user.setContactNumber("9076095678");
 			//user.setUserStatus("Active");
 			assertEquals("Registration Successfull", true, userDAO.createUser(user));
 		}
 		
-		  //@Test
+		  @Test
 		  public void authenticateUserTest() 
 		  {
-			  user.setEmailId("mitali@gmail.com"); 
-			  user.setPassword("mitali");
+			  user.setEmailId("sayali@gmail.com"); 
+			  user.setPassword("sayali");
 			  assertEquals("Login successfull", User.class,userDAO.authenticateUser(user).getClass());
 		  }
 		  
@@ -59,11 +60,11 @@ public class UserTest {
 			  assertEquals("Delete User Test Successfull", true, userDAO.deleteUser("abc@gmail.com"));
 		  }
 		  
-		  //@Test
+		  @Test
 		  public void updateUserTestCase()
 		  {
 			user=userDAO.getUserByUserId("shivani@gmail.com");
-			user.setContactNumber("85435678907");
+			user.setContactNumber("85435643437");
 			assertEquals("Update User Test Case Successfull", true,userDAO.updateUser(user));
 		  }
 

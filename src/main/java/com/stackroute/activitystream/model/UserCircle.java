@@ -5,26 +5,27 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Component;
 
 @Component
 @Entity
+@Table(name="UserCircle")
 public class UserCircle 
 {
 	@Id
 	private int userCircleId;
 	
-	
-	//Hibernate annotations for validations are commented
-	//@NotNull
+	@NotNull
 	private String emailId;
-	//@NotNull
+	@NotNull
 	private int circleId;
-	//@NotNull
+	@NotNull
 	private Date subscriptionDate;
 	
-	//@NotNull
+	@NotNull
 	private String subscriptionStatus;
 	
 	

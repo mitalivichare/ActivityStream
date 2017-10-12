@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 
 import com.stackroute.activitystream.dao.UserCircleDAO;
 import com.stackroute.activitystream.model.UserCircle;
@@ -22,7 +23,7 @@ public class UserCircleTest {
 		usercircle= new UserCircle();
 	}
 	
-	@Test
+	@Test(expected=DataIntegrityViolationException.class)
 	public void addUserToCircleTest()
 	{
 		//usercircle.setCircleId(1);

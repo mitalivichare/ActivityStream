@@ -40,7 +40,7 @@ public class UserDAOImpl implements UserDAO
 		}
 		catch(Exception e)
 		{
-			logger.debug("Registration Failed in DAO..");
+			logger.error("Registration Failed in DAO..");
 			return  false;
 		}
 	}
@@ -87,10 +87,18 @@ public class UserDAOImpl implements UserDAO
 		try
 		{
 			User user=getUserByUserId(emailId);
+			if(user!=null)
+			{
 			user.setUserStatus("N");
 			sessionFactory.getCurrentSession().update(user.getEmailId(),user);
 			logger.debug("De-Activating User Account Successfull");
 			return true;
+			}
+			else
+			{
+				return false;
+				
+			}
 		}
 		catch(Exception e)
 		{
