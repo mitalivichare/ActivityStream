@@ -29,6 +29,8 @@ public class Message
 	@JsonProperty(value="receiver_email_id")
 	private String receiverUserId;
 	
+	//the field name should not be receiverCirleId
+	//both receiver and sender subsrbied to same circle.  The why the name is receiverCircleID?
 	@JsonProperty(value="circle_id")
 	private int receiverCircleId;
 	
