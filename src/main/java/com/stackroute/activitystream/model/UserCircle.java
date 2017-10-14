@@ -18,6 +18,7 @@ public class UserCircle
 	@Id
 	private int userCircleId;
 	
+	//emialId should be unqie and not null
 	@NotNull
 	private String emailId;
 	@NotNull
@@ -25,6 +26,9 @@ public class UserCircle
 	@NotNull
 	private Date subscriptionDate;
 	
+	
+	//All the status fields can be char data type. like s->subscribed, u->unscribed etc.,
+	//Note use char for all fields where you are storing status.
 	@NotNull
 	private String subscriptionStatus;
 	
