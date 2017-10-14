@@ -141,6 +141,8 @@ public class CircleDAOImpl implements CircleDAO
 	{
 		try
 		{
+		        //it is fetching all the circles.  we need only active circles.
+			//I hope this comment I give previously.
 			List<Circle> circleList=sessionFactory.getCurrentSession().createQuery("from Circle").list();
 			logger.debug("Fetching list of circles Successfull in DAO");
 			return circleList;
