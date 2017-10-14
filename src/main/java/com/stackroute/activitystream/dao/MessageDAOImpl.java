@@ -24,6 +24,7 @@ public class MessageDAOImpl implements MessageDAO {
 		try {
 			message.setMessageDate(new Date());
 			//message.setRecievingUserId(emailId);
+			//where you will create multiple records for each user?
 			sessionFactory.getCurrentSession().save(message);
 			return true;
 		} catch (Exception e) {
@@ -39,6 +40,7 @@ public class MessageDAOImpl implements MessageDAO {
 		try {
 			message.setMessageDate(new Date());
 			//message.setRecievingUserId(emailId);
+			//Need to store the message in another table also like UserMessage
 			sessionFactory.getCurrentSession().save(message);
 			return true;
 		} catch (Exception e) {
@@ -54,6 +56,7 @@ public class MessageDAOImpl implements MessageDAO {
 		// TODO Auto-generated method stub
 		try {
 			List<Message> userMessages;
+			//wrong query.  think and let me know.
 			Query query = sessionFactory.getCurrentSession().createQuery("from Message where receiverUserId = ?");
 			query.setParameter(0, emailId);
 			userMessages = query.list();
@@ -71,6 +74,8 @@ public class MessageDAOImpl implements MessageDAO {
 		try {
 			List<Message> circleMessages;
 			Query query = sessionFactory.getCurrentSession().createQuery("from Message where receiverCircleId = ?");
+			
+			//What if user want previously records/messages??
 			query.setParameter(0, circleId);
 			query.setMaxResults(10);
 			circleMessages = query.list();
