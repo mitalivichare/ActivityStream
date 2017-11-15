@@ -52,7 +52,7 @@ public class User
 	//@JsonProperty(value="user_status")
 	@NotNull
 	@Column
-	private String userStatus;
+	private char userStatus;
 	
 	public String getFirstName() {
 		return firstName;
@@ -84,10 +84,10 @@ public class User
 	public void setContactNumber(String contactNumber) {
 		this.contactNumber = contactNumber;
 	}
-	public String getUserStatus() {
+	public char getUserStatus() {
 		return userStatus;
 	}
-	public void setUserStatus(String userStatus) {
+	public void setUserStatus(char userStatus) {
 		this.userStatus = userStatus;
 	}
 	@Override

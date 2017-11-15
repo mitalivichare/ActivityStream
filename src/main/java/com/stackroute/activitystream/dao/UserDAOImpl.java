@@ -33,7 +33,11 @@ public class UserDAOImpl implements UserDAO
 		try
 		{
 			//by default status set as active once user deleted the status is set to non-active
-			user.setUserStatus("A");
+			if(getUserByUserId(user.getEmailId())!= null)
+			{
+				return false;
+			}
+			user.setUserStatus('A');
 			sessionFactory.getCurrentSession().save(user);
 			logger.debug("Registration sucessfull in DAO");
 			return true;
@@ -87,9 +91,9 @@ public class UserDAOImpl implements UserDAO
 		try
 		{
 			User user=getUserByUserId(emailId);
-			if(user!=null)
+			if(user.getUserStatus()!='N')
 			{
-			user.setUserStatus("N");
+			user.setUserStatus('N');
 			sessionFactory.getCurrentSession().update(user.getEmailId(),user);
 			logger.debug("De-Activating User Account Successfull");
 			return true;

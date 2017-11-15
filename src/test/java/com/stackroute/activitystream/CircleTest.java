@@ -21,42 +21,49 @@ import com.stackroute.activitystream.model.Circle;
 @SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT,classes=ActivityStreamBackendApplication.class)
 @SpringBootApplication(scanBasePackages={"com.stackroute.activitystream"})
 public class CircleTest {
-	//@Autowired
-		private static Circle circle;
+		@Autowired
+		private Circle circle;
 		
 		@Autowired
 		private CircleDAO circleDAO;
 
 
-		@BeforeClass
+		/*@BeforeClass
 		public static void init() {
 			
 			circle=new Circle();
-		}
+		}*/
 		
 		@Test
-		public void createCircleTest()
+		public void createCirclePositiveTest()
 		{
-			circle.setCircleName("Re-boot");
-			circle.setCircleOwner("lisa@gmail.com");
-			circle.setCircleDescription("The Re-boot gang");
+			circle.setCircleName("leaders");
+			circle.setCircleOwner("kinjal@gmail.com");
+			circle.setCircleDescription("kinjal group");
 			//circle.setCircleCreationDate();
 			assertEquals(true, circleDAO.createCircle(circle));
 		}
 		
-		//@Test
+		
+		@Test
 		public void updateCircle()
 		{
-			circle=circleDAO.getCircleByCircleId(2);
-			circle.setCircleStatus("A");
-			//circle.setCircleDescription("The Ghoooost Gang");
+			circle=circleDAO.getCircleByCircleId(7);
+			//circle.setCircleStatus("");
+			circle.setCircleDescription("The borivali Gang");
 			assertEquals(true,circleDAO.updateCircle(circle));
 		}
 		
-		//@Test
-		public void deleteCircle()
+		@Test
+		public void deleteCirclePositiveTest()
 		{
-			assertEquals("Circle Deleted Successfully", true, circleDAO.deleteCircle(2));
+			assertEquals("Circle Deleted Successfully", true, circleDAO.deleteCircle(4));
+		}
+		
+		@Test
+		public void deleteCircleNegativeTest()
+		{
+			assertEquals("Circle Deleted Successfully", false, circleDAO.deleteCircle(3));
 		}
 		
 		//@Test

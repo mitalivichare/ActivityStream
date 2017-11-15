@@ -37,7 +37,7 @@ public class Circle
 	
 	@NotNull
 	@Column
-	private String circleStatus;
+	private char circleStatus;
 	
 	public int getCircleId() {
 		return circleId;
@@ -70,10 +70,10 @@ public class Circle
 		this.circleCreationDate = new Date();
 	}
 	
-	public String getCircleStatus() {
+	public char getCircleStatus() {
 		return circleStatus;
 	}
-	public void setCircleStatus(String circleStatus) {
+	public void setCircleStatus(char circleStatus) {
 		this.circleStatus = circleStatus;
 	}
 	@Override

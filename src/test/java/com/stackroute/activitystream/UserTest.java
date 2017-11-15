@@ -20,30 +20,41 @@ import com.stackroute.activitystream.model.User;
 @SpringBootApplication(scanBasePackages={"com.stackroute.activitystream"})
 public class UserTest {
 
-	//@Autowired
-		private static User user;
+		@Autowired
+		private User user;
 
 		@Autowired
 		private UserDAO userDAO;
 
 
-		@BeforeClass
+		/*@BeforeClass
 		public static void init() {
 			user=new User();
 		}
-
+*/
 		/**
 		 * 
 		 */
-		@Test(expected=DataIntegrityViolationException.class)
-		public void createUserTest() {
-			user.setFirstName("Shivani");
-			user.setLastName("Vichare");
-			user.setEmailId("shivani@gmail.com");
-			user.setPassword("shivani");
-			user.setContactNumber("9076095678");
-			//user.setUserStatus("Active");
+		@Test
+		public void createUserPositiveTest() {
+			user.setFirstName("Pooja");
+			user.setLastName("Devi");
+			user.setEmailId("kinjal@gmail.com");
+			user.setPassword("pooja");
+			user.setContactNumber("8086444678");
+			//user.setUserStatus('A');
 			assertEquals("Registration Successfull", true, userDAO.createUser(user));
+		}
+		
+		@Test
+		public void createUserNegativeTest() {
+			user.setFirstName("Sapna");
+			user.setLastName("Vichare");
+			user.setEmailId("kirti@gmail.com");
+			user.setPassword("sapna");
+			user.setContactNumber("8086095678");
+			//user.setUserStatus('A');
+			assertEquals("Registration Un-Successfull", false, userDAO.createUser(user));
 		}
 		
 		  @Test
@@ -54,17 +65,24 @@ public class UserTest {
 			  assertEquals("Login successfull", User.class,userDAO.authenticateUser(user).getClass());
 		  }
 		  
-		  //@Test
-		  public void deleteUserTest()
+		  @Test
+		  public void deleteUserPositiveTest()
 		  {
-			  assertEquals("Delete User Test Successfull", true, userDAO.deleteUser("abc@gmail.com"));
+			  assertEquals("Delete User Test Successfull", true, userDAO.deleteUser("priti@gmail.com"));
+		  }
+		  
+		  @Test
+		  public void deleteUserNegativeTest()
+		  {
+			  assertEquals("Delete User Test Successfull", false, userDAO.deleteUser("sonam@gmail.com"));
 		  }
 		  
 		  @Test
 		  public void updateUserTestCase()
 		  {
-			user=userDAO.getUserByUserId("shivani@gmail.com");
-			user.setContactNumber("85435643437");
+			user=userDAO.getUserByUserId("sonal@gmail.com");
+			//user.setContactNumber("85435643437");
+			user.setUserStatus('A');
 			assertEquals("Update User Test Case Successfull", true,userDAO.updateUser(user));
 		  }
 

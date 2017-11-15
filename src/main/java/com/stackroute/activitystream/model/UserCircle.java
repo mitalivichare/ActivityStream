@@ -4,21 +4,22 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Component;
 
+//@Table(name="UserCircle")
 @Component
 @Entity
-@Table(name="UserCircle")
 public class UserCircle 
 {
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int userCircleId;
 	
-	//emialId should be unqie and not null
 	@NotNull
 	private String emailId;
 	@NotNull
@@ -26,11 +27,8 @@ public class UserCircle
 	@NotNull
 	private Date subscriptionDate;
 	
-	
-	//All the status fields can be char data type. like s->subscribed, u->unscribed etc.,
-	//Note use char for all fields where you are storing status.
 	@NotNull
-	private String subscriptionStatus;
+	private char subscriptionStatus;
 	
 	
 	public int getUserCircleId() {
@@ -57,10 +55,10 @@ public class UserCircle
 	public void setSubscriptionDate() {
 		this.subscriptionDate = new Date();
 	}
-	public String getSubscriptionStatus() {
+	public char getSubscriptionStatus() {
 		return subscriptionStatus;
 	}
-	public void setSubscriptionStatus(String subscriptionStatus) {
+	public void setSubscriptionStatus(char subscriptionStatus) {
 		this.subscriptionStatus = subscriptionStatus;
 	}
 	@Override

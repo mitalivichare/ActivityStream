@@ -34,7 +34,7 @@ public class CircleDAOImpl implements CircleDAO
 		try
 		{
 			circle.setCircleCreationDate();
-			circle.setCircleStatus("A");
+			circle.setCircleStatus('A');
 			sessionFactory.getCurrentSession().save(circle);
 			logger.debug("Circle Creation Successfull in DAO");
 			return true;
@@ -68,11 +68,11 @@ public class CircleDAOImpl implements CircleDAO
 		{
 			
 			Circle deleteCircle=getCircleByCircleId(circleId);
-			if(deleteCircle != null)
+			if(deleteCircle.getCircleStatus() != 'N')
 			{
-			deleteCircle.setCircleStatus("N");
+			deleteCircle.setCircleStatus('N');
 			sessionFactory.getCurrentSession().update(deleteCircle);
-			logger.debug("Deleting User Successfull in DAO");
+			logger.info("Deleting User Successfull in DAO");
 			return true;
 			}
 			else
@@ -107,7 +107,7 @@ public class CircleDAOImpl implements CircleDAO
 		try
 		{
 			Circle circle= sessionFactory.getCurrentSession().get(Circle.class,circleId);
-			logger.debug("Fetching circle details by ID Successfull in DAO");
+			logger.info("Fetching circle details by ID Successfull in DAO");
 			return circle;
 		}
 		catch(Exception e)
@@ -124,7 +124,7 @@ public class CircleDAOImpl implements CircleDAO
 			Query query=sessionFactory.getCurrentSession().createQuery("from Circle where circleName=?");
 			query.setParameter(0, circleName);
 			Circle circle=(Circle) query.uniqueResult();
-			logger.debug("Fetching circle details by Circle Name Successfull in DAO");
+			logger.info("Fetching circle details by Circle Name Successfull in DAO");
 			return circle;
 		}
 		catch(Exception e)
@@ -134,17 +134,15 @@ public class CircleDAOImpl implements CircleDAO
 		}
 	}
 	
-	//method to get details of all circle both active and non-active
+	//method to get details of all circle only active 
 
 	@SuppressWarnings("unchecked")
 	public List<Circle> getAllCircles()
 	{
 		try
 		{
-		        //it is fetching all the circles.  we need only active circles.
-			//I hope this comment I give previously.
 			List<Circle> circleList=sessionFactory.getCurrentSession().createQuery("from Circle").list();
-			logger.debug("Fetching list of circles Successfull in DAO");
+			logger.info("Fetching list of circles Successfull in DAO");
 			return circleList;
 		}
 		catch(Exception e)

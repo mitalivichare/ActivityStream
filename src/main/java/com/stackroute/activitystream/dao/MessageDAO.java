@@ -10,9 +10,9 @@ public interface MessageDAO {
 
 	boolean sendMessageToUser(Message message);
 
-	List<Message> getMessagesByUser(String emailId);
+	List<Message> getMessagesForUser(String emailId);
 
-	List<Message> getMessagesByCircle(int circleId);
+	List<Message> getMessagesForCircle(int circleId);
 
 
 }

@@ -23,6 +23,8 @@ public class UserCircleDAOImpl implements UserCircleDAO
 	@Autowired
 	UserCircle userCircle;
 	
+	public UserCircleDAOImpl()
+	{}
 	
 	public UserCircleDAOImpl(SessionFactory sessionFactory)
 	{
@@ -34,26 +36,37 @@ public class UserCircleDAOImpl implements UserCircleDAO
 		try
 		{
 			UserCircle userSubscription=getUserCircle(circleId, emailId);
+			if(userSubscription != null && userSubscription.getSubscriptionStatus()=='A')
+			{
+				return false;
+			}
 			if(userSubscription == null)
 			{
 				userCircle.setCircleId(circleId);
 				userCircle.setEmailId(emailId);
 				userCircle.setSubscriptionDate();
-				userCircle.setSubscriptionStatus("A");
+				userCircle.setSubscriptionStatus('A');
 				sessionFactory.getCurrentSession().save(userCircle);
 				return true;
 			}
+			/*else
+			{
+				return false;
+			}*/
 			else
 			{
-				userCircle.setSubscriptionStatus("A");
-				sessionFactory.getCurrentSession().update(userSubscription);
+				userCircle.setSubscriptionStatus('A');
+				userCircle.setSubscriptionDate();
+				sessionFactory.openSession().update(userCircle);
 				return true;
 			}
+			
 		}
 		catch(Exception e)
 		{
 			return false;
 		}
+		
 
 	}
 
@@ -62,9 +75,10 @@ public class UserCircleDAOImpl implements UserCircleDAO
 		try
 		{
 			userCircle=getUserCircle(circleId, emailId);
-			if(userCircle != null)
+			if(userCircle != null && userCircle.getSubscriptionStatus() =='A')
 			{
-				userCircle.setSubscriptionStatus("N");
+				
+				userCircle.setSubscriptionStatus('N');
 				sessionFactory.getCurrentSession().update(userCircle);
 				return true;
 			}
@@ -85,15 +99,17 @@ public class UserCircleDAOImpl implements UserCircleDAO
 	{
 		try
 		{
-		Query query=sessionFactory.getCurrentSession().createQuery("from UserCircle where circleId=? and emailId=? and subscriptionStatus=?");
+		Query query=sessionFactory.getCurrentSession().createQuery("from UserCircle where circleId=? and emailId=?");
 		query.setParameter(0, circleId);
 		query.setParameter(1, emailId);
-		query.setParameter(2, "A");
+		//query.setParameter(2, 'A');
 		UserCircle userCircle=(UserCircle) query.uniqueResult();
 		return userCircle;
 		}
 		catch(Exception e)
 		{
+			e.printStackTrace();
+			
 			return null;
 		}
 	}

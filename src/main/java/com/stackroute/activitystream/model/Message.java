@@ -2,7 +2,10 @@ package com.stackroute.activitystream.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import org.springframework.stereotype.Component;
@@ -13,31 +16,39 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Entity
 public class Message
 {
+	
+	//@JsonProperty(value="message_id")
 	@Id
-	@JsonProperty(value="message_id")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column
 	private int messageId;
 	
-	@JsonProperty(value="message_type")
+	//@JsonProperty(value="message_type")
+	@Column
 	private String messageType;
 	
-	@JsonProperty(value="message_content")
+	//@JsonProperty(value="message_content")
+	@Column
 	private String messageContent;
 	
-	@JsonProperty(value="sender_email_id")
+	//@JsonProperty(value="sender_email_id")
+	@Column
 	private String senderEmailId;
 	
-	@JsonProperty(value="receiver_email_id")
+	//@JsonProperty(value="receiver_email_id")
+	@Column
 	private String receiverUserId;
 	
-	//the field name should not be receiverCirleId
-	//both receiver and sender subsrbied to same circle.  The why the name is receiverCircleID?
-	@JsonProperty(value="circle_id")
-	private int receiverCircleId;
+	//@JsonProperty(value="circle_id")
+	@Column
+	private int circleId;
 	
-	@JsonProperty(value="message_date")
+	//@JsonProperty(value="message_date")
+	@Column
 	private Date messageDate;
 	
-	@JsonProperty(value="max_size")
+	//@JsonProperty(value="max_size")
+	@Column
 	private int maxSize;
 
 	public int getMessageId() {
@@ -81,12 +92,12 @@ public class Message
 		this.receiverUserId = receiverUserId;
 	}
 
-	public int getReceiverCircleId() {
-		return receiverCircleId;
+	public int getCircleId() {
+		return circleId;
 	}
 
-	public void setReceiverCircleId(int receiverCircleId) {
-		this.receiverCircleId = receiverCircleId;
+	public void setCircleId(int circleId) {
+		this.circleId = circleId;
 	}
 
 	public Date getMessageDate() {
@@ -108,8 +119,8 @@ public class Message
 	@Override
 	public String toString() {
 		return "Message [messageId=" + messageId + ", messageType=" + messageType + ", messageContent=" + messageContent
-				+ ", senderEmailId=" + senderEmailId + ", receiverUserId=" + receiverUserId + ", receiverCircleId="
-				+ receiverCircleId + ", messageDate=" + messageDate + ", maxSize=" + maxSize + "]";
+				+ ", senderEmailId=" + senderEmailId + ", receiverUserId=" + receiverUserId + ", circleId="
+				+ circleId + ", messageDate=" + messageDate + ", maxSize=" + maxSize + "]";
 	}
 
 	
